@@ -37,21 +37,11 @@ app.get("/", (req, res) => {
 
 app.post("/up", upload.single('avatar'), (req, res) => {
 	console.log(req.file);
-  res.end("foi")
-	// res.end(JSON.stringify({sucess: true}));
-	// var loadCollection = require('./utils').loadCollection;
- //  try {
- //    const col = loadCollection(COLLECTION_NAME, db);
- //    col.then(collection => {
- //      // console.log(collection);
- //      const data = collection.insert(req.file);
- //    })
-
-
- //    db.saveDatabase();
- //    res.send({ id: data.$loki, fileName: data.filename, originalName: data.originalname });
- //  } catch (err) {
- //      console.log(err)
- //      res.sendStatus(400);
- //  }
+  res.end(req.file)
 })
+
+app.post("/up-array", upload.array('avatar-array'), (req, res) => {
+  console.log(req.file, req.files);
+  res.end("[" +req.files.map(f => f.filename).join(",") + "]");
+})
+
